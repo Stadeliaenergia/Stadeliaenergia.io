@@ -33,8 +33,8 @@ app.post('/enviar-email', upload.single('fatura'), async (req, res) => {
 
         // Configurar e-mail
         const msg = {
-            to: 'dudupsoares06@gmail.com', // Substitua pelo seu email real
-            from: 'dudupsoares06@gmail.com', // Verifique se esse email está validado no SendGrid
+            to: process.env.VERIFIED_RECEIVER, // Substitua pelo seu email real
+            from: process.env.VERIFIED_SENDER, // Verifique se esse email está validado no SendGrid
             subject: 'Novo Cliente - Formulário de Economia',
             text: `Nome: ${nome}\nDDD: ${ddd}\nTelefone: ${telefone}\nEmail: ${email}`,
             attachments: [

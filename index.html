@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Energia Solar - Geração Compartilhada</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <img src="/Imagens/LOGO SANTA ADELIA-04.png" alt="Logo da Empresa">
+        <div class="menu-toggle">☰</div> <!-- Ícone de menu hamburguer -->
+        <nav class="nav-links">
+            <a href="#inicio">Início</a>
+            <a href="#como-funciona">Como Funciona</a>
+            <a href="#vantagens">Vantagens</a>
+            <a href="#como-aderir">Como Aderir</a>
+            <a href="#faq">Perguntas Frequentes</a>
+        </nav>
+
+    </header>
+
+    
+    
+    <section id="inicio" class="hero">
+        <div class="hero-text">
+            <h1>Economize 20% na sua conta de luz com energia renovável e sustentável.</h1>
+            <p>Sem custos ou obras, você reduz seus gastos e ainda contribui para um futuro mais verde!</p>
+        </div>
+        <div class="form-section">
+            <h2>Aderir ao Benefício</h2>
+            <p>Preencha as informações abaixo, e nos envie sua ultima conta de energia para receber a sua proposta.</p>
+            <form action="/send-email" id="formulario" method="post" enctype="multipart/form-data">
+                <div class="nome-input">
+                    <input type="text" id="nome" name="nome" placeholder="Nome" required>
+                </div>
+                <div class="phone-input">
+                    <input class="ddd" type="text" id="ddd" name="ddd" placeholder="DDD" required>
+                    <input class="tel" type="tel" id="telefone" name="telefone" placeholder="Telefone" required>
+                </div>
+                <div class="nome-input">
+                    <input type="email" id="email" name="email" placeholder="Email" required> 
+                </div>
+                
+                <label for="fatura" class="file-upload">📤 Anexe sua conta de energia</label>
+                <input type="file" id="fatura" name="fatura" accept=".pdf, .jpg, .png" required>
+                <button type="submit">Quero Economizar</button>
+            </form>
+            <p id="mensagem" style="display:none; color: green; font-weight: bold;">Seu formulário foi enviado com sucesso!</p>
+        </div>
+    </section>
+
+    <section id="como-funciona" class="como-funciona">
+        <h2>Como Funciona?</h2>
+        <div class="processo">
+            <div class="etapa">
+                <img src="/Imagens/solar-cell.png" alt="Produzimos Energia">
+                <h3>Produzimos Energia</h3>
+                <p>A energia é gerada em nossas usinas solares.</p>
+            </div>
+            <div class="etapa">
+                <img src="/Imagens/power.png" alt="Envio para a Celpe">
+                <h3>A Energia é distribuída</h3>
+                <p>A energia entra na rede elétrica e é distribuída pela celpe.</p>
+            </div>
+            <div class="etapa">
+                <img src="/Imagens/bolt.png" alt="Geração de Créditos">
+                <h3>Geração de créditos</h3>
+                <p>a Celpe gera créditos que serão aplicados a sua conta.</p>
+            </div>
+            <div class="etapa">
+                <img src="/Imagens/discount.png" alt="Economia Garantida">
+                <h3>Economia Garantida</h3>
+                <p>Você economiza até 20%, sem precisar de investimentos e instalações.</p>
+            </div>
+        </div>
+    </section>
+    
+    <section id="vantagens" class="vantagens">
+        <h2>Vantagens de Aderir à Geração Compartilhada</h2>
+        <div class="beneficios">
+            <div class="beneficio">
+                <img src="/Imagens/discount.png" alt="Economia na Conta">
+                <h3>Economia de Até 20%</h3>
+                <p>Reduza sua conta de luz sem precisar investir em equipamentos.</p>
+            </div>
+            <div class="beneficio">
+                <img src="/Imagens/tools.png" alt="Energia Sustentável">
+                <h3>Sem Investimento e sem instalação</h3>
+                <p>Não precisa realizar nenhum investimento ou instalação de painéis solares.</p>
+            </div>
+            <div class="beneficio">
+                <img src="/Imagens/renewable-energy.png" alt="Processo Simples">
+                <h3>Energia Limpa e renovável</h3>
+                <p>Ajude o meio ambiente utilizando energia 100% renovável.</p>
+            </div>
+        </div>
+    </section>
+    
+    <section id="como-aderir" class="como-aderir">
+        <h2>Como Aderir ao Benefício?</h2>
+        <div class="etapas">
+            <div class="etapa">
+                <img src="/Imagens/bill.png" alt="Envio de Fatura">
+                <h3>Envio da Conta</h3>
+                <p>Ao enviar sua conta de energia, você receberá uma proposta.</p>
+            </div>
+            <div class="etapa">
+                <img src="/Imagens/checked.png" alt="Proposta Aceita">
+                <h3>Proposta Aceita</h3>
+                <p>Ao aceitar a proposta, seguimos para a formalização.</p>
+            </div>
+            <div class="etapa">
+                <img src="/Imagens/document.png" alt="Envio dos Dados">
+                <h3>Envio dos Dados</h3>
+                <p>Você nos fornece os dados necessários para cadastro.</p>
+            </div>
+            <div class="etapa">
+                <img src="/Imagens/contract.png" alt="Contrato Assinado">
+                <h3>Contrato Assinado</h3>
+                <p>Finalizamos toda a parte documental.</p>
+            </div>
+            <div class="etapa">
+                <img src="/Imagens/save-money.png" alt="Comece a Economizar">
+                <h3>Comece a Economizar</h3>
+                <p>Em até 60 dias, seus créditos começam a ser aplicados.</p>
+            </div>
+        </div>
+    </section>
+    
+    <div class="simulacao">
+        <h2>Simulação de Economia</h2>
+        <p>Insira o valor médio da sua conta de energia:</p>
+        <p>O valor mínimo é de R$400,00</p>
+        <div class="input-container">
+            <span>R$</span>
+            <input type="number" id="valorConta" min="400" step="50" placeholder="Ex: 600" />
+        </div>
+    
+        <div class="progress-container">
+            <div class="progress-bar"></div>
+        </div>
+    
+        <p class="economia-text">Em um ano, sua economia será de:</p>
+        <div class="resultado">R$ 0,00</div>
+    </div>
+    
+
+    
+
+    <section id="faq" class="faq-container">
+        <h2>Perguntas Frequentes</h2>
+        <div class="faq-item" onclick="toggleFaq(this)">
+            <div class="faq-question">
+                <span>Como funciona a geração compartilhada?</span>
+                <span class="faq-icon">➕</span>
+            </div>
+            <div class="faq-answer">
+                Nós produzimos energia em nossos parques solares, e a Celpe nos concede créditos de energia, que podem ser usados por todos que fazem parte da nossa associação.
+            </div>
+        </div>
+
+        
+        <div class="faq-item" onclick="toggleFaq(this)">
+            <div class="faq-question">
+                <span>Como receberei a nova fatura/boleto de energia?</span>
+                <span class="faq-icon">➕</span>
+            </div>
+            <div class="faq-answer">
+                Nós iremos lhe mandar o nosso boleto com o desconto aplicado, juntamente com a fatura da celpe para conferência de consumo.
+            </div>
+        </div>
+
+        <div class="faq-item" onclick="toggleFaq(this)">
+            <div class="faq-question">
+                <span>Existe Fidelidade de contrato?</span>
+                <span class="faq-icon">➕</span>
+            </div>
+            <div class="faq-answer">
+                Não existe fidelidade, no momento que desejar sair do benefício, nada lhe impede, apenas aguardar o prazo de transferência da Celpe.
+            </div>
+        </div>
+
+
+        <div class="faq-item" onclick="toggleFaq(this)">
+            <div class="faq-question">
+                <span>Quanto tempo leva para começar a economizar?</span>
+                <span class="faq-icon">➕</span>
+            </div>
+            <div class="faq-answer">
+                O prazo médio para a ativação dos créditos é de até 60 dias após a assinatura do contrato.
+            </div>
+        </div>     
+    </section>
+
+
+
+    <script>
+    document.querySelector(".menu-toggle").addEventListener("click", function () {
+            document.querySelector(".nav-links").classList.toggle("active");
+        });
+    </script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const faqItems = document.querySelectorAll(".faq-item");
+            
+            faqItems.forEach(item => {
+                item.addEventListener("click", function () {
+                    this.classList.toggle("active");
+
+            // Muda o ícone entre ➕ e ➖
+            const icon = this.querySelector(".faq-icon");
+            icon.textContent = this.classList.contains("active") ? "➖" : "➕";
+        });
+    });
+});
+    </script>
+
+    <script>
+        document.getElementById("valorConta").addEventListener("input", function() {
+            let valor = parseFloat(this.value);
+            
+            if (valor >= 400) {
+                let economia = valor * 0.20 * 12;
+                document.querySelector(".resultado").textContent = `R$ ${economia.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`;
+            
+                let largura = Math.max(Math.min((valor / 2000) * 100, 100), 20);
+                document.querySelector(".progress-bar").style.width = `${largura}%`;
+            } else {
+                document.querySelector(".resultado").textContent = "R$0,00";
+                document.querySelector(".progress-bar").style.width = "0%";
+            }
+        });
+    </script>
+
+    
+    <script src="script.js"></script>
+
+
+
+    <footer>
+        <p>© 2025 Santa Adélia Energia - Todos os direitos reservados</p>
+    </footer>
+</body>
+</html>

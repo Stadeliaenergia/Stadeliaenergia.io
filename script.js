@@ -22,51 +22,61 @@ document.getElementById('formulario').addEventListener('submit', async function 
     }
 });
 
-document.getElementById('formulario').addEventListener('submit', function (event) {
-    event.preventDefault();
+document.getElementById('formulario').addEventListener('submit', async function (event) {
+    event.preventDefault(); // Impede o envio imediato
 
-    let nome = document.getElementById('nome').value.trim();
-    let ddd = document.getElementById('ddd').value.trim();
-    let telefone = document.getElementById('telefone').value.trim();
-    let email = document.getElementById('email').value.trim();
-    
-    // Regex para validar e-mail
-    let emailValido = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    const nome = document.getElementById('nome').value.trim();
+    const ddd = document.getElementById('ddd').value.trim();
+    const telefone = document.getElementById('telefone').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const fatura = document.getElementById('fatura'); // Input de arquivo
 
+    // Expressões Regulares para validação
+    const dddRegex = /^[0-9]{2}$/; // Apenas dois números
+    const telefoneRegex = /^[0-9]{5}-[0-9]{4}$/; // Formato 99999-9999
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Formato de e-mail válido
+
+    // Validações
     if (nome === "") {
-        alert("❌ Preencha seu nome completo!");
+        alert("⚠️ Preencha o campo Nome.");
+        return;
+    }
+    if (!dddRegex.test(ddd)) {
+        alert("⚠️ O DDD deve conter 2 números.");
+        return;
+    }
+    if (!telefoneRegex.test(telefone)) {
+        alert("⚠️ O telefone deve estar no formato 99999-9999.");
+        return;
+    }
+    if (!emailRegex.test(email)) {
+        alert("⚠️ Insira um e-mail válido.");
+        return;
+    }
+    if (fatura.files.length === 0) {
+        alert("⚠️ É necessário anexar a fatura de energia.");
         return;
     }
 
-    if (!/^\d{2}$/.test(ddd)) {
-        alert("❌ O DDD deve conter exatamente **2 números**!");
-        return;
+    // Se todas as validações passaram, continua o envio
+    const formData = new FormData(this);
+
+    try {
+        const response = await fetch('https://seu-servidor.com/enviar-email', { // Alterar para seu backend
+            method: 'POST',
+            body: formData
+        });
+
+        const result = await response.json();
+
+        if (response.ok) {
+            alert('✅ Formulário enviado com sucesso!');
+            this.reset();
+        } else {
+            throw new Error(result.message || 'Erro ao enviar formulário.');
+        }
+    } catch (error) {
+        console.error('Erro ao enviar:', error);
+        alert('❌ Erro ao enviar formulário. Tente novamente.');
     }
-
-    if (!/^\d{5}-\d{4}$/.test(telefone)) {
-        alert("❌ O telefone deve estar no formato **99999-9999**!");
-        return;
-    }
-
-    if (!emailValido) {
-        alert("❌ Insira um e-mail válido!");
-        return;
-    }
-
-    alert("✅ Formulário enviado com sucesso!");
-    this.submit();
-});
-
-// Formatar DDD (Apenas 2 números)
-document.getElementById('ddd').addEventListener('input', function (e) {
-    this.value = this.value.replace(/\D/g, '').slice(0, 2); // Remove não números e limita 2 dígitos
-});
-
-// Formatar Telefone (99999-9999)
-document.getElementById('telefone').addEventListener('input', function (e) {
-    let value = e.target.value.replace(/\D/g, '');
-    if (value.length > 5) {
-        value = value.replace(/^(\d{5})(\d{0,4})/, '$1-$2');
-    }
-    e.target.value = value;
 });

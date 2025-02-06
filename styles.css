@@ -648,6 +648,33 @@ footer {
     }
 }
 
+@media (min-width: 1600px) {
+    .container {
+        max-width: 1600px; /* Expande para telas ultrawide */
+    }
+}
+
+/* Em telas grandes, aumentar um pouco a fonte */
+@media (min-width: 1600px) {
+    body {
+        font-size: 18px;
+    }
+    h1 {
+        font-size: 42px;
+    }
+    h2 {
+        font-size: 34px;
+    }
+}
+
+/* Em telas menores, reduzir um pouco */
+@media (max-width: 768px) {
+    body {
+        font-size: 14px;
+    }
+}
+
+
 
 /* Estiliza a barra de rolagem */
 ::-webkit-scrollbar {

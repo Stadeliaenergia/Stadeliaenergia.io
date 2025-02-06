@@ -4,21 +4,20 @@ document.getElementById('formulario').addEventListener('submit', async function 
     const formData = new FormData(this);
 
     try {
-        const response = await fetch('https://stadeliaenergia-io.onrender.com', {
+        const response = await fetch('https://stadeliaenergia-io.onrender.com/enviar-email', {
             method: 'POST',
             body: formData
         });
 
-        const result = await response.json();
-
-        if (response.ok) {
-            alert('✅ Formulário enviado com sucesso!');
-            this.reset();
-        } else {
-            throw new Error(result.message || 'Erro ao enviar formulário.');
+        if (!response.ok) {
+            throw new Error(`Erro HTTP: ${response.status}`);
         }
+
+        const result = await response.json();
+        alert(result.message || '✅ Formulário enviado com sucesso!');
+        this.reset();
     } catch (error) {
         console.error('Erro ao enviar:', error);
-        alert('❌ Erro ao enviar formulário. Tente novamente.');
+        alert(`❌ Erro ao enviar formulário: ${error.message}`);
     }
 });

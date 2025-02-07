@@ -20,6 +20,7 @@ document.getElementById('removerFatura').addEventListener('click', function () {
 });
 
 
+
 document.getElementById('formulario').addEventListener('submit', async function (event) {
     event.preventDefault(); // Impede o envio imediato
 
@@ -28,8 +29,6 @@ document.getElementById('formulario').addEventListener('submit', async function 
     const telefone = document.getElementById('telefone').value.trim();
     const email = document.getElementById('email').value.trim();
     const fatura = document.getElementById('fatura'); // Input de arquivo
-    const botaoEnviar = document.getElementById('botao-enviar'); // Botão de envio
-    const avisoStatus = document.getElementById('aviso-status'); // Elemento de aviso
 
     // Expressões Regulares para validação
     const dddRegex = /^[0-9]{2}$/; // Apenas dois números
@@ -48,7 +47,7 @@ document.getElementById('formulario').addEventListener('submit', async function 
         formularioValido = false;
     }
     if (!telefoneRegex.test(telefone)) {
-        alert("⚠️ O telefone está incompleto.");
+        alert("⚠️ O telefone deve estar no formato 99999-9999.");
         formularioValido = false;
     }
     if (!emailRegex.test(email)) {
@@ -65,12 +64,6 @@ document.getElementById('formulario').addEventListener('submit', async function 
         return;
     }
 
-    // Mostra aviso de envio e desativa o botão
-    avisoStatus.textContent = "⏳ Enviando o formulário, aguarde...";
-    avisoStatus.style.display = "block";
-    botaoEnviar.disabled = true;
-    botaoEnviar.style.opacity = "0.6"; // Dá um efeito visual de desabilitado
-
     // Se chegou aqui, significa que todas as validações passaram, então envia
     const formData = new FormData(this);
 
@@ -85,21 +78,10 @@ document.getElementById('formulario').addEventListener('submit', async function 
         }
 
         const result = await response.json();
-        avisoStatus.textContent = "✅ Formulário enviado com sucesso!";
-        avisoStatus.style.color = "green";
-
-        this.reset(); // Limpa o formulário após o envio
-
-        // Esconde o aviso de fatura anexada
-        document.getElementById('faturaContainer').style.display = "none"; 
-
+        alert(result.message || '✅ Formulário enviado com sucesso!');
+        this.reset();
     } catch (error) {
         console.error('Erro ao enviar:', error);
-        avisoStatus.textContent = "❌ Erro ao enviar o formulário. Tente novamente.";
-        avisoStatus.style.color = "red";
-    } finally {
-        // Reativa o botão de envio após a resposta do servidor
-        botaoEnviar.disabled = false;
-        botaoEnviar.style.opacity = "1"; // Retorna ao estado normal
+        alert(`❌ Erro ao enviar formulário: ${error.message}`);
     }
 });

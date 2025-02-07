@@ -5,14 +5,15 @@ const sgMail = require('@sendgrid/mail');
 require('dotenv').config();
 
 const app = express();
-const PORT = process.env.PORT || 3000; // Render define automaticamente a porta
+const PORT = process.env.PORT || 3000; // Porta dinâmica para Render
 
 // Configurar SendGrid
 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
 // Configuração do CORS
 app.use(cors());
-app.use(express.json());
+app.use(express.json()); // Permite JSON no body das requisições
+app.use(express.urlencoded({ extended: true })); // Permite envio de form-data
 
 // Configuração do Multer para upload de arquivos
 const storage = multer.memoryStorage();
@@ -22,7 +23,7 @@ app.post('/enviar-email', upload.single('fatura'), async (req, res) => {
     console.log("🚀 Recebendo requisição no backend...");
 
     try {
-        const { nome, ddd, telefone, email, mensagem } = req.body; // Adicionado `mensagem`
+        const { nome, ddd, telefone, email, mensagem } = req.body;
 
         if (!nome || !ddd || !telefone || !email || !req.file) {
             console.error("⚠️ Erro: Campos obrigatórios faltando!");
@@ -56,8 +57,7 @@ app.post('/enviar-email', upload.single('fatura'), async (req, res) => {
     }
 });
 
-
-
+// Inicializa o servidor
 app.listen(PORT, () => {
     console.log(`Servidor rodando na porta ${PORT}`);
 });

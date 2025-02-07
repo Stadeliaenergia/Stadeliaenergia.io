@@ -230,6 +230,19 @@
     </script>
 
     <script>
+        document.getElementById('telefone').addEventListener('input', function (event) {
+    let telefone = event.target.value.replace(/\D/g, ''); // Remove tudo que não for número
+
+    if (telefone.length > 5) {
+        telefone = telefone.substring(0, 5) + '-' + telefone.substring(5, 9);
+    }
+
+    event.target.value = telefone; // Atualiza o campo de telefone com a formatação
+});
+
+    </script>
+
+    <script>
         document.getElementById("valorConta").addEventListener("input", function() {
             let valor = parseFloat(this.value);
             

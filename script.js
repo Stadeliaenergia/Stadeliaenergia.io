@@ -14,19 +14,29 @@ document.getElementById('fatura').addEventListener('change', function () {
 document.getElementById('removerFatura').addEventListener('click', function () {
     let faturaInput = document.getElementById('fatura');
     let faturaContainer = document.getElementById('faturaContainer');
-
-    faturaInput.value = ""; // Limpa o input
-    faturaContainer.style.display = "none"; // Esconde o aviso
-});
-
-document.addEventListener("DOMContentLoaded", function () {
-    const botaoEnviar = document.getElementById('botao-enviar');
-    const avisoStatus = document.getElementById('aviso-status'); // Elemento de aviso
+    const mensagemFatura = document.getElementById('mensagem-fatura');
+    const removerFatura = document.getElementById('removerFatura');
 
     if (!botaoEnviar) {
         console.error("❌ Erro: O botão de envio não foi encontrado no DOM.");
         return;
     }
+
+    // Exibir nome do arquivo anexado
+    faturaInput.addEventListener('change', function () {
+        if (this.files.length > 0) {
+            mensagemFatura.textContent = this.files[0].name;
+            faturaContainer.style.display = "flex";
+        } else {
+            faturaContainer.style.display = "none";
+        }
+    });
+
+    // Remover fatura manualmente
+    removerFatura.addEventListener('click', function () {
+        faturaInput.value = "";
+        faturaContainer.style.display = "none";
+    });
 
     document.getElementById('formulario').addEventListener('submit', async function (event) {
         event.preventDefault();
@@ -35,7 +45,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const ddd = document.getElementById('ddd').value.trim();
         const telefone = document.getElementById('telefone').value.trim();
         const email = document.getElementById('email').value.trim();
-        const fatura = document.getElementById('fatura'); // Input de arquivo
+        const mensagem = document.getElementById('mensagem').value.trim(); // Campo de dúvidas
 
         // Expressões Regulares para validação
         const dddRegex = /^[0-9]{2}$/;
@@ -60,7 +70,7 @@ document.addEventListener("DOMContentLoaded", function () {
             alert("⚠️ Insira um e-mail válido.");
             formularioValido = false;
         }
-        if (fatura.files.length === 0) {
+        if (faturaInput.files.length === 0) {
             alert("⚠️ É necessário anexar a fatura de energia.");
             formularioValido = false;
         }
@@ -69,15 +79,14 @@ document.addEventListener("DOMContentLoaded", function () {
             return;
         }
 
-        // Mostra aviso de envio e desativa o botão apenas se ele existir
-        if (botaoEnviar && avisoStatus) {
-            avisoStatus.textContent = "⏳ Enviando o formulário, aguarde...";
-            avisoStatus.style.display = "block";
-            botaoEnviar.disabled = true;
-            botaoEnviar.style.opacity = "0.6";
-        }
+        // Mostra aviso de envio e desativa o botão
+        avisoStatus.textContent = "⏳ Enviando o formulário, aguarde...";
+        avisoStatus.style.display = "block";
+        botaoEnviar.disabled = true;
+        botaoEnviar.style.opacity = "0.6";
 
         const formData = new FormData(this);
+        formData.append('mensagem', mensagem); // Adiciona a mensagem ao envio
 
         try {
             const response = await fetch('https://stadeliaenergia-io.onrender.com/enviar-email', {
@@ -93,15 +102,18 @@ document.addEventListener("DOMContentLoaded", function () {
             avisoStatus.textContent = "✅ Formulário enviado com sucesso!";
             avisoStatus.style.color = "green";
             this.reset();
+
+            // Remover fatura automaticamente após o envio
+            faturaInput.value = "";
+            faturaContainer.style.display = "none";
+
         } catch (error) {
             console.error('Erro ao enviar:', error);
             avisoStatus.textContent = "❌ Erro ao enviar o formulário. Tente novamente.";
             avisoStatus.style.color = "red";
         } finally {
-            if (botaoEnviar) {
-                botaoEnviar.disabled = false;
-                botaoEnviar.style.opacity = "1";
-            }
+            botaoEnviar.disabled = false;
+            botaoEnviar.style.opacity = "1";
         }
     });
 });

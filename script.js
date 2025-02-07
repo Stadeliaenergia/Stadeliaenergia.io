@@ -1,3 +1,18 @@
+document.getElementById('fatura').addEventListener('change', function () {
+    let mensagemFatura = document.getElementById('mensagem-fatura');
+    
+    if (this.files.length > 0) {
+        mensagemFatura.textContent = `📄 ${this.files[0].name} anexado com sucesso!`;
+        mensagemFatura.style.display = "block"; // Mostra a mensagem
+    } else {
+        mensagemFatura.style.display = "none"; // Esconde a mensagem caso o usuário remova o arquivo
+    }
+});
+
+
+
+
+
 document.getElementById('formulario').addEventListener('submit', async function (event) {
     event.preventDefault(); // Impede o envio imediato
 
@@ -24,7 +39,7 @@ document.getElementById('formulario').addEventListener('submit', async function 
         formularioValido = false;
     }
     if (!telefoneRegex.test(telefone)) {
-        alert("⚠️ O telefone deve estar no formato 99999-9999.");
+        alert("⚠️ O telefone está incompleto.");
         formularioValido = false;
     }
     if (!emailRegex.test(email)) {

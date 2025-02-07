@@ -12,13 +12,21 @@ document.getElementById('fatura').addEventListener('change', function () {
 
 // Remover fatura
 document.getElementById('removerFatura').addEventListener('click', function () {
+    let faturaInput = document.getElementById('fatura');
+    let faturaContainer = document.getElementById('faturaContainer');
+
+    faturaInput.value = ""; // Limpa o input
+    faturaContainer.style.display = "none"; // Esconde o aviso
+});
+
+document.addEventListener("DOMContentLoaded", function () {
     const botaoEnviar = document.getElementById('botao-enviar');
     const avisoStatus = document.getElementById('aviso-status'); // Elemento de aviso
     const faturaInput = document.getElementById('fatura');
     const faturaContainer = document.getElementById('faturaContainer');
     const mensagemFatura = document.getElementById('mensagem-fatura');
     const removerFatura = document.getElementById('removerFatura');
-    
+
     if (!botaoEnviar) {
         console.error("❌ Erro: O botão de envio não foi encontrado no DOM.");
         return;

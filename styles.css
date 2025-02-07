@@ -48,26 +48,6 @@ header img {
     margin-right:30px;
 }
 
-input, select, textarea{
-    font-size:16px;
-}
-
-textarea {
-    width: 100%;
-    padding: 12px;
-    font-size: 16px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    resize: none;
-    font-family: 'Poppins', sans-serif;
-}
-
-textarea:focus {
-    border-color: #008837;
-    outline: none;
-    box-shadow: 0 0 5px rgba(0, 136, 55, 0.5);
-}
-
 #faturaContainer {
     display: flex;
     align-items: center;
@@ -769,4 +749,65 @@ footer {
     background: linear-gradient(to bottom, #008837, #00a04a);
 }
 
+/* Ajusta os campos de input e textarea para manter um alinhamento uniforme */
+input, textarea {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    transition: border 0.3s ease-in-out;
+}
+
+/* Ajusta a altura do campo de mensagem para manter consistência */
+textarea {
+    height: 70px; /* Ajuste conforme necessário */
+    resize: none;
+}
+
+/* Para garantir que o padding interno fique uniforme */
+.formulario-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* Espaço entre os campos */
+}
+
+/* Melhorando o botão de anexar fatura */
+.file-upload {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #c3f0c6;
+    color: #000;
+    padding: 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+.file-upload:hover {
+    background-color: #008837;
+    color: white;
+}
+
+/* Ajustando os botões para ficarem bem alinhados */
+button {
+    width: 100%;
+    padding: 14px;
+    font-size: 18px;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s ease-in-out;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .formulario-container {
+        width: 90%;
+    }
+}
 

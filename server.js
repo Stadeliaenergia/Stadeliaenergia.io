@@ -30,7 +30,7 @@ app.post('/enviar-email', upload.single('fatura'), async (req, res) => {
     console.log("📩 Destinatário:", req.body.email);
     console.log("📄 Fatura anexada:", req.file ? req.file.originalname : "Nenhuma fatura anexada!");
 
-    const { nome, ddd, telefone, email, mensagem } = req.body;
+    const { nome, ddd, telefone, email } = req.body;
 
     // Verifica se todos os campos obrigatórios estão preenchidos
     if (!nome || !ddd || !telefone || !email || !req.file) {
@@ -42,7 +42,7 @@ app.post('/enviar-email', upload.single('fatura'), async (req, res) => {
         to: process.env.EMAIL_DESTINO, // Seu e-mail para receber as informações
         from: process.env.EMAIL_REMETENTE, // O e-mail verificado no SendGrid
         subject: '📩 Novo Formulário Recebido',
-        text: `Nome: ${nome}\nDDD: ${ddd}\nTelefone: ${telefone}\nEmail: ${email}\n\n💬 Mensagem: ${mensagem || "Nenhuma mensagem informada."}`,
+        text: `Nome: ${nome}\nDDD: ${ddd}\nTelefone: ${telefone}\nEmail: ${email}`,
         attachments: req.file ? [{
             content: req.file.buffer.toString("base64"),
             filename: req.file.originalname,

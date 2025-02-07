@@ -19,8 +19,6 @@ document.getElementById('removerFatura').addEventListener('click', function () {
     faturaContainer.style.display = "none"; // Esconde o aviso
 });
 
-
-
 document.getElementById('formulario').addEventListener('submit', async function (event) {
     event.preventDefault(); // Impede o envio imediato
 
@@ -29,6 +27,8 @@ document.getElementById('formulario').addEventListener('submit', async function 
     const telefone = document.getElementById('telefone').value.trim();
     const email = document.getElementById('email').value.trim();
     const fatura = document.getElementById('fatura'); // Input de arquivo
+    const botaoEnviar = document.getElementById('botao-enviar'); // Botão de envio
+    const avisoStatus = document.getElementById('aviso-status'); // Elemento de aviso
 
     // Expressões Regulares para validação
     const dddRegex = /^[0-9]{2}$/; // Apenas dois números
@@ -64,11 +64,17 @@ document.getElementById('formulario').addEventListener('submit', async function 
         return;
     }
 
-    // Se chegou aqui, significa que todas as validações passaram, então envia
+    // Exibe aviso de envio imediatamente
+    avisoStatus.textContent = "⏳ Enviando o formulário, aguarde...";
+    avisoStatus.style.display = "block";
+    botaoEnviar.disabled = true;
+    botaoEnviar.style.opacity = "0.6"; // Dá um efeito visual de desabilitado
+
+    // Envio do formulário
     const formData = new FormData(this);
 
     try {
-        const response = await fetch('https://stadeliaenergia-io.onrender.com/enviar-email', { // URL correta do backend
+        const response = await fetch('https://stadeliaenergia-io.onrender.com/enviar-email', {
             method: 'POST',
             body: formData
         });
@@ -78,10 +84,16 @@ document.getElementById('formulario').addEventListener('submit', async function 
         }
 
         const result = await response.json();
-        alert(result.message || '✅ Formulário enviado com sucesso!');
+        avisoStatus.textContent = "✅ Formulário enviado com sucesso!";
+        avisoStatus.style.color = "green";
         this.reset();
     } catch (error) {
         console.error('Erro ao enviar:', error);
-        alert(`❌ Erro ao enviar formulário: ${error.message}`);
+        avisoStatus.textContent = "❌ Erro ao enviar o formulário. Tente novamente.";
+        avisoStatus.style.color = "red";
+    } finally {
+        // Reativa o botão de envio após a resposta do servidor
+        botaoEnviar.disabled = false;
+        botaoEnviar.style.opacity = "1"; // Retorna ao estado normal
     }
 });

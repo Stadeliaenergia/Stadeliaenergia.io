@@ -39,8 +39,8 @@ app.post('/enviar-email', upload.single('fatura'), async (req, res) => {
 
     // Conteúdo do e-mail
     const msg = {
-        to: process.env.EMAIL_DESTINO, // Seu e-mail para receber as informações
-        from: process.env.EMAIL_REMETENTE, // O e-mail verificado no SendGrid
+        to: process.env.VERIFIED_RECEIVER, // Seu e-mail para receber as informações
+        from: process.env.VERIFIED_SENDER, // O e-mail verificado no SendGrid
         subject: '📩 Novo Formulário Recebido',
         text: `Nome: ${nome}\nDDD: ${ddd}\nTelefone: ${telefone}\nEmail: ${email}`,
         attachments: req.file ? [{

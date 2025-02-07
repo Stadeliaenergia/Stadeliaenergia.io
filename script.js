@@ -1,6 +1,5 @@
 document.getElementById('fatura').addEventListener('change', function () {
     let mensagemFatura = document.getElementById('mensagem-fatura');
-    let removerFatura = document.getElementById('removerFatura');
     let faturaContainer = document.getElementById('faturaContainer');
 
     if (this.files.length > 0) {
@@ -29,7 +28,6 @@ document.getElementById('formulario').addEventListener('submit', async function 
     const telefone = document.getElementById('telefone').value.trim();
     const email = document.getElementById('email').value.trim();
     const fatura = document.getElementById('fatura'); // Input de arquivo
-    const mensagem = document.getElementById('mensagem').value.trim(); // Campo de dúvidas
     const botaoEnviar = document.getElementById('botao-enviar'); // Botão de envio
     const avisoStatus = document.getElementById('aviso-status'); // Elemento de aviso
 
@@ -75,7 +73,6 @@ document.getElementById('formulario').addEventListener('submit', async function 
 
     // Se chegou aqui, significa que todas as validações passaram, então envia
     const formData = new FormData(this);
-    formData.append('mensagem', mensagem); // Adiciona a mensagem ao envio
 
     try {
         const response = await fetch('https://stadeliaenergia-io.onrender.com/enviar-email', { // URL correta do backend

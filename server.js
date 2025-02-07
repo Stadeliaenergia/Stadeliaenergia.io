@@ -12,7 +12,7 @@ sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
 // Configuração do CORS
 app.use(cors());
-app.use(express.json()); // Permite JSON no body das requisições
+app.use(express.json());
 app.use(express.urlencoded({ extended: true })); // Permite envio de form-data
 
 // Configuração do Multer para upload de arquivos
@@ -23,7 +23,7 @@ app.post('/enviar-email', upload.single('fatura'), async (req, res) => {
     console.log("🚀 Recebendo requisição no backend...");
 
     try {
-        const { nome, ddd, telefone, email, mensagem } = req.body;
+        const { nome, ddd, telefone, email } = req.body;
 
         if (!nome || !ddd || !telefone || !email || !req.file) {
             console.error("⚠️ Erro: Campos obrigatórios faltando!");
@@ -37,7 +37,7 @@ app.post('/enviar-email', upload.single('fatura'), async (req, res) => {
             to: process.env.EMAIL_DESTINO, // Seu e-mail para receber as informações
             from: process.env.EMAIL_REMETENTE, // O e-mail verificado no SendGrid
             subject: '📩 Novo Formulário Recebido',
-            text: `Nome: ${nome}\nDDD: ${ddd}\nTelefone: ${telefone}\nEmail: ${email}\n\n💬 Mensagem: ${mensagem || "Nenhuma mensagem informada."}`,
+            text: `Nome: ${nome}\nDDD: ${ddd}\nTelefone: ${telefone}\nEmail: ${email}`,
             attachments: req.file ? [{
                 content: req.file.buffer.toString("base64"),
                 filename: req.file.originalname,

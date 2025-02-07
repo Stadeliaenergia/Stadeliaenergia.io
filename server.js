@@ -22,7 +22,7 @@ app.post('/enviar-email', upload.single('fatura'), async (req, res) => {
     console.log("🚀 Recebendo requisição no backend...");
 
     try {
-        const { nome, ddd, telefone, email } = req.body;
+        const { nome, ddd, telefone, email, mensagem } = req.body; // Adicionado `mensagem`
 
         if (!nome || !ddd || !telefone || !email || !req.file) {
             console.error("⚠️ Erro: Campos obrigatórios faltando!");
@@ -32,7 +32,6 @@ app.post('/enviar-email', upload.single('fatura'), async (req, res) => {
         console.log(`📩 Enviando e-mail para: ${email}`);
 
         // Configurar e-mail
-
         const msg = {
             to: process.env.EMAIL_DESTINO, // Seu e-mail para receber as informações
             from: process.env.EMAIL_REMETENTE, // O e-mail verificado no SendGrid
@@ -56,6 +55,7 @@ app.post('/enviar-email', upload.single('fatura'), async (req, res) => {
         res.status(500).json({ message: 'Erro ao enviar e-mail' });
     }
 });
+
 
 
 app.listen(PORT, () => {

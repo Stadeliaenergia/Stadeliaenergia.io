@@ -90,7 +90,11 @@ document.getElementById('formulario').addEventListener('submit', async function 
         const result = await response.json();
         avisoStatus.textContent = "✅ Formulário enviado com sucesso!";
         avisoStatus.style.color = "green";
-        this.reset();
+
+        this.reset(); // Limpa o formulário após o envio
+
+        // Esconde o aviso de fatura anexada
+        document.getElementById('faturaContainer').style.display = "none"; 
 
     } catch (error) {
         console.error('Erro ao enviar:', error);

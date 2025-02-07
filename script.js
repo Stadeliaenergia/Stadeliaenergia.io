@@ -11,8 +11,6 @@ document.getElementById('fatura').addEventListener('change', function () {
 
 
 
-
-
 document.getElementById('formulario').addEventListener('submit', async function (event) {
     event.preventDefault(); // Impede o envio imediato
 

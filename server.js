@@ -42,7 +42,7 @@ app.post('/enviar-email', upload.single('fatura'), async (req, res) => {
         to: process.env.VERIFIED_RECEIVER, // Seu e-mail para receber as informações
         from: process.env.VERIFIED_SENDER, // O e-mail verificado no SendGrid
         subject: '📩 Novo Formulário Recebido',
-        text: `Nome: ${nome}\nDDD: ${ddd}\nTelefone: ${telefone}\nEmail: ${email}\n\n💬 Mensagem: ${mensagem || "Nenhuma mensagem informada."}`,
+        text: `Nome: ${nome}\nDDD: ${ddd}\nTelefone: ${telefone}\nEmail: ${email}\n\n💬 Mensagem: ${mensagem} || "Nenhuma mensagem informada."}`,
         attachments: req.file ? [{
             content: req.file.buffer.toString("base64"),
             filename: req.file.originalname,

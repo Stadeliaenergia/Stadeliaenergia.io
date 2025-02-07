@@ -52,6 +52,72 @@ input, select, textarea{
     font-size:16px;
 }
 
+textarea {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    resize: none;
+    font-family: 'Poppins', sans-serif;
+}
+
+textarea:focus {
+    border-color: #008837;
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 136, 55, 0.5);
+}
+
+#faturaContainer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background: #f9f9f9;
+    max-width: 300px;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.file-icon {
+    font-size: 18px;
+    color: #005a1f;
+}
+
+#mensagem-fatura {
+    color: #005a1f;
+    font-size: 14px;
+    font-weight: 500;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 180px;
+}
+
+.remove-btn {
+    background: none;  /* Remove qualquer fundo */
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    color: #d9534f;
+    transition: color 0.3s ease, transform 0.2s;
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.remove-btn:hover {
+    color: #c9302c; /* Apenas muda a cor no hover */
+    transform: scale(1.2); /* Dá um leve efeito ao passar o mouse */
+    background: none; /* Garante que nenhum fundo será aplicado */
+}
+
+
+
+
 /* Adicionando efeito de linha ao passar o mouse no menu */
 .nav-links a {
     text-decoration: none;

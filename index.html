@@ -24,7 +24,7 @@
     
     <section id="inicio" class="hero">
         <div class="hero-text">
-            <h1>Economize 20% na sua conta de luz com energia renovável e sustentável</h1>
+            <h1>Economize 20% na sua conta de luz com energia renovável e sustentável!</h1>
             <p>Sem custos ou obras, você reduz seus gastos e ainda contribui para um futuro mais verde!</p>
         </div>
         <div class="form-section">
@@ -37,16 +37,29 @@
                 <div class="phone-input">
                     <input type="number" class='ddd' id="ddd" name="ddd" minlength="2" maxlength="2" placeholder='81' required oninput="this.value = this.value.slice(0, 2)">
                     <input type="text" class='tel' id="telefone" name="telefone" required maxlength="10" placeholder="99999-9999">
-
                 </div>
+
                 <div class="nome-input">
                     <input type="email" id="email" name="email" placeholder="Email" required> 
                 </div>
+
+                <textarea id="mensagem" name="mensagem" rows="4" placeholder="Escreva sua dúvida aqui..."></textarea>
                 
                 <label for="fatura" class="file-upload">📤 Anexe sua conta de energia</label>
                 <input type="file" id="fatura" name="fatura" accept=".pdf, .jpg, .png" required>
-                <p id="mensagem-fatura" style="color: green; font-weight: bold; display: none;"></p>
+                <!-- Mensagem de confirmação de fatura anexada e botão de remover -->
+                <div id="faturaContainer" style="display: none; align-items: center; gap: 12px; padding: 10px; border: 1px solid #ddd; border-radius: 8px; background: #f9f9f9; max-width: 300px;">
+                    <div style="display: flex; align-items: center; gap: 8px;">
+                        <span class="file-icon">📄</span>
+                        <span id="mensagem-fatura" style="color: #005a1f; font-size: 14px; font-weight: 500;"></span>
+                    </div>
+                    <button type="button" id="removerFatura" class="remove-btn">✖</button>
+                </div>
+                
+                                
+
                 <button type="submit">Quero Economizar</button>
+                <p id="aviso-status" style="display:none; text-align:center; font-weight:bold;"></p>
             </form>
         </div>
     </section>

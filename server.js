@@ -32,19 +32,18 @@ app.post('/enviar-email', upload.single('fatura'), async (req, res) => {
         console.log(`📩 Enviando e-mail para: ${email}`);
 
         // Configurar e-mail
+
         const msg = {
-            to: process.env.VERIFIED_RECEIVER, // Substitua pelo seu email real
-            from: process.env.VERIFIED_SENDER, // Verifique se esse email está validado no SendGrid
-            subject: 'Novo Cliente - Formulário de Economia',
-            text: `Nome: ${nome}\nDDD: ${ddd}\nTelefone: ${telefone}\nEmail: ${email}`,
-            attachments: [
-                {
-                    content: req.file.buffer.toString("base64"),
-                    filename: req.file.originalname,
-                    type: req.file.mimetype,
-                    disposition: "attachment"
-                }
-            ]
+            to: process.env.EMAIL_DESTINO, // Seu e-mail para receber as informações
+            from: process.env.EMAIL_REMETENTE, // O e-mail verificado no SendGrid
+            subject: '📩 Novo Formulário Recebido',
+            text: `Nome: ${nome}\nDDD: ${ddd}\nTelefone: ${telefone}\nEmail: ${email}\n\n💬 Mensagem: ${mensagem || "Nenhuma mensagem informada."}`,
+            attachments: req.file ? [{
+                content: req.file.buffer.toString("base64"),
+                filename: req.file.originalname,
+                type: req.file.mimetype,
+                disposition: "attachment"
+            }] : []
         };
 
         await sgMail.send(msg);
